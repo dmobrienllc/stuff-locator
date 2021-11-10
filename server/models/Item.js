@@ -11,7 +11,7 @@ Item.init(
             autoIncrement: true,
             allowNull: false
         },
-        item_name:{
+        label:{
             type: DataTypes.STRING,
             allowNull: false
         },
@@ -20,11 +20,19 @@ Item.init(
         },
         image_url:{
             type: DataTypes.STRING
+        },
+        container_id:{
+            type: DataTypes.INTEGER,
+            allowNull: false,
+            references: {
+                model: 'container',
+                key: 'id'
+            }
         }
     },
     {
         sequelize,
-        timestamps: false,
+        timestamps: true,
         freezeTableName: true,
         underscored: false,
         modelName: 'item',

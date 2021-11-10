@@ -11,17 +11,28 @@ Container.init(
             autoIncrement: true,
             allowNull: false
         },
-        container_name:{
+        label:{
             type: DataTypes.STRING,
             allowNull: false
         },
+        is_virtual: {
+            type: DataTypes.BOOLEAN
+        },
         metadata:{
             type: DataTypes.STRING
+        },
+        location_id: {
+            type: DataTypes.INTEGER,
+            allowNull:false,
+            references:{
+                model:'location',
+                key: 'id'
+            }
         }
     },
     {
         sequelize,
-        timestamps: false,
+        timestamps: true,
         freezeTableName: true,
         underscored: false,
         modelName: 'container',

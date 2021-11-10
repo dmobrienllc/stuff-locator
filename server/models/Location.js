@@ -11,17 +11,25 @@ Location.init(
             autoIncrement: true,
             allowNull: false
         },
-        location_name:{
+        label:{
             type: DataTypes.STRING,
             allowNull: false
         },
         metadata:{
             type: DataTypes.STRING
+        },
+        user_id:{
+            type: DataTypes.INTEGER,
+            allowNull: false,
+            references: {
+                model: 'user',
+                key: 'id'
+            }
         }
     },
     {
         sequelize,
-        timestamps: false,
+        timestamps: true,
         freezeTableName: true,
         underscored: false,
         modelName: 'location',
