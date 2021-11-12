@@ -25,7 +25,16 @@ module.exports = {
         if(!locationData){
             return res.status(400).json({message: "Unable to create user."});
         }
-
         return res.status(200).json(locationData);
+    },
+    async deleteLocation(req, res) {
+        console.log('location-controller.deleteLocation')
+
+        Location.destroy({ where: { id: req.params.id } })
+            .catch((err) => {
+                console.log(err);
+                return res.status(400).json(err);
+            });
+        return res.status(200).json({message: 'Location Deleted.'});
     }
 }

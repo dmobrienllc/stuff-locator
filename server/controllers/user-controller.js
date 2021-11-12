@@ -25,5 +25,15 @@ module.exports = {
                                                                 return res.status(400).json(err);
                                                             });
         return res.status(200).json(userData);
+    },
+    async deleteUser(req, res) {
+        console.log('user-controller.deleteUser')
+
+        User.destroy({ where: { id: req.params.id } })
+            .catch((err) => {
+                console.log(err);
+                return res.status(400).json(err);
+            });
+        return res.status(200).json({message: 'User Deleted.'});
     }
 }

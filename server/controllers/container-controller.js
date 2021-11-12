@@ -22,7 +22,16 @@ module.exports = {
         if(!containerData){
             return res.status(400).json({message: "Unable to create container."});
         }
-
         return res.status(200).json(containerData);
+    },
+    async deleteContainer(req, res) {
+        console.log('container-controller.deleteContainer')
+
+        Container.destroy({ where: { id: req.params.id } })
+            .catch((err) => {
+                console.log(err);
+                return res.status(400).json(err);
+            });
+        return res.status(200).json({message: 'Container Deleted.'});
     }
 }
