@@ -3,9 +3,13 @@ const Location = require('./Location');
 const Container = require('./Container');
 const Item = require('./Item');
 
-User.hasMany(Location,{
+User.hasMany(Location, {
     foreignKey: 'user_id',
     onDelete: 'CASCADE'
+});
+
+Location.belongsTo(User, {
+    foreignKey: 'user_id'
 });
 
 Location.hasMany(Container, {
@@ -13,7 +17,11 @@ Location.hasMany(Container, {
     onDelete: 'CASCADE'
 });
 
-Container.hasMany(Item,{
+Container.belongsTo(Location,{
+    foreignKey: 'location_id'
+});
+
+Container.hasMany(Item, {
     foreignKey: 'container_id',
     onDelete: 'CASCADE'
 });
