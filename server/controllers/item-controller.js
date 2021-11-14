@@ -26,6 +26,17 @@ module.exports = {
         }
         return res.status(200).json(itemData);
     },
+    async updateItem(req,res){
+        console.log('item-controller.updateItem');
+
+        let numRowsUpdated = await Item.update(req.body,{
+            where : {id: req.params.id}
+        })
+        .catch((err) => {
+            return res.status(400).json({message: `Could not update Item with id: ${req.params.id}`})
+        })
+        return res.status(200).json({NumberRowsUpdated: numRowsUpdated});
+    },
     async deleteItem(req, res) {
         console.log('item-controller.deleteItem')
 

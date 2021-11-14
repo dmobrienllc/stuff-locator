@@ -24,6 +24,17 @@ module.exports = {
         }
         return res.status(200).json(containerData);
     },
+    async updateContainer(req,res){
+        console.log('container-controller.updateContainer');
+
+        let numRowsUpdated = await Container.update(req.body,{
+            where : {id: req.params.id}
+        })
+        .catch((err) => {
+            return res.status(400).json({message: `Could not update Container with id: ${req.params.id}`})
+        })
+        return res.status(200).json({NumberRowsUpdated: numRowsUpdated});
+    },
     async deleteContainer(req, res) {
         console.log('container-controller.deleteContainer')
 

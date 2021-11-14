@@ -27,6 +27,18 @@ module.exports = {
         }
         return res.status(200).json(locationData);
     },
+    //TODO: Support updating array of containers?
+    async updateLocation(req,res){
+        console.log('location-controller.updateLocation');
+
+        let locationData = await Location.update(req.body,{
+            where: { id: req.params.id}
+        })
+        .catch((err) => {
+            return res.status(400).json({message: `Could not update Location with id: ${req.params.id}`});
+        })
+        return res.status(200).json({numRowsAffected: locationData})
+    },
     async deleteLocation(req, res) {
         console.log('location-controller.deleteLocation')
 
